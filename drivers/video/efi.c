@@ -104,7 +104,7 @@ static int get_mode_info(struct vesa_mode_info *vesa, u64 *fbp,
 static int get_mode_from_entry(struct vesa_mode_info *vesa, u64 *fbp,
 			       struct efi_gop_mode_info **infop)
 {
-	struct efi_gop_mode *mode;
+	struct efi_entry_gopmode *mode;
 	int size;
 	int ret;
 
@@ -117,7 +117,7 @@ static int get_mode_from_entry(struct vesa_mode_info *vesa, u64 *fbp,
 	*fbp = mode->fb_base;
 	vesa->x_resolution = mode->info->width;
 	vesa->y_resolution = mode->info->height;
-	*infop = mode->info;
+	*infop = (struct efi_gop_mode_info *)mode->info;
 
 	return 0;
 }
